@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+}
+div {
+    background-color: midnightblue;
+    text-align: center;
+}
+h2 {
+    text-align: center;
+    color: silver;
+}
+img {
+    width: 400px;
+}
