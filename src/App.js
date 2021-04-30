@@ -68,6 +68,11 @@ export default function App() {
         setUsers([...users])
     }
 
+    const clear = () => {
+        users.splice(users.index, 1);
+        setUsers([...users])
+    }
+
     let [counter, setCounter] = useState(0)
 
     const increment = () => {
@@ -104,6 +109,7 @@ export default function App() {
                 users.map((value, index) =>
                     <UserComponent key={index}
                                    {...value}
+                                   clearFunc={clear}
                     />
                 )
             }
