@@ -7,7 +7,7 @@ export default function UserComponent(props) {
             <h2>{name}</h2>
             <h3>{age} - {status.toString()}</h3>
             <p>{country} {city} {street} {houseNumber}</p>
-            <button onClick={()=> set(list.filter(value=> value.id !== id))}>clear</button>
+            <button onClick={()=> set(list.filter(value=> value.id !== id))}>Clear</button>
 
         </div>
     );
