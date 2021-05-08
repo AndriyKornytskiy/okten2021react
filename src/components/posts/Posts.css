@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+}
+.wraper {
+    display: flex;
+}
+.posts-box {
+    width: fit-content;
+    border: 1px solid darkblue;
+}
+.single-post-box {
+    width: fit-content;
+    border: 1px solid darkgoldenrod;
+}
