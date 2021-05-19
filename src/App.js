@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Counter = ()=> {
+
+    const [value, setValue] = useState(0);
+
+    const counter = useSelector(({counter}) => counter);
+
+    const dispatch = useDispatch();
+
+    return(
+        <>
+            <h1>counter: {counter}</h1>
+            <button onClick={()=> {dispatch({type: 'INC'})}}>int</button>
+            <button onClick={()=> {dispatch({type: 'DEC'})}}>dec</button>
+            <button onClick={()=> {dispatch({type: 'RESET'})}}>reset</button>
+            <input type="number" value={value} onChange={({target: {value}})=> setValue(value)}/>
+            <button onClick={()=> {dispatch({type: 'INC_CUSTOM', payload: Number(value)})}}>inc custom</button>
+        </>
+    );
+};
+
+export default function App() {
+    return (
+        <div>
+            <Counter/>
+        </div>
+    );
 }
-
-export default App;
