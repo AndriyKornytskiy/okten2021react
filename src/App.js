@@ -1,56 +1,46 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {useEffect} from "react";
 
 
+
 const Posts = () => {
-    const {isLoading, posts} = useSelector(({isLoading, posts}) => ({
-        isLoading,
-        posts
-    }));
+
+    const store = useSelector((store) => store);
+
     const dispatch = useDispatch();
-
-    const fetchPosts = async () => {
-        try {
-            dispatch({type: 'SET_IS_LOADING'});
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-            const data = await response.json();
-
-            dispatch({type: 'SET_POSTS', payload: data});
-            dispatch({type: 'RESET_IS_LOADING'});
-            console.log(data);
-        }catch (e) {
-            console.log(e, 'fatal error');
-        }
-    };
-
 
 
     useEffect(() => {
-        fetchPosts();
-    },[]);
+    dispatch({type: "SET_IS_LOADING"});
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(value => value.json())
+            .then(value => {
+                dispatch({type: "SET_POSTS", payload: value});
 
-    if (isLoading) {
+                dispatch({type: "RESET_IS_LOADING"});
+
+                console.log(value);
+            });
+
+    },[])
+
+
+    if (store.isLoading){
         return (
-            <h1>LOADING DATA !!!!</h1>
+            <h1>LOADING!!!</h1>
         )
     }
 
-
     return (
         <div>
-        {
-            posts.map((post) => (
-                <p key={post.id}>
-                    {post.title} = {post.body}
-                </p>
-            ))
-        }
+            {
+                store.posts.map((post) => (
+                    <p key={post.id}>{post.id}: {post.title} = {post.body}</p>
+                ))
+            }
         </div>
-    );
-};
-
-
-
+    )
+}
 
 export default function App() {
     return (
